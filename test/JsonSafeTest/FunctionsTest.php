@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace JsonSafeTest;
 
+use JsonSafe\JsonDecodeException;
+use JsonSafe\JsonEncodeException;
 use function JsonSafe\json_decode_safe;
 use function JsonSafe\json_encode_safe;
 
@@ -20,5 +22,17 @@ class FunctionsTest extends BaseTestCase
 
         $outputData = json_decode_safe($json);
         $this->assertSame($data, $outputData);
+    }
+
+    public function testDecodeFailed()
+    {
+        $this->expectException(JsonDecodeException::class);
+        json_decode_safe("This is not json{");
+    }
+
+    public function testEncodeFailed()
+    {
+        $this->expectException(JsonEncodeException::class);
+        json_encode_safe(fopen('php://input', 'r+'));
     }
 }

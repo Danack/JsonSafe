@@ -25,7 +25,7 @@
             "src/JsonSafe/functions.php"
         ],
         "psr-0": {
-            "Params\\": "lib/"
+            "JsonSafe\\": "src/"
         }
     },
     "autoload-dev": {

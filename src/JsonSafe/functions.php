@@ -33,7 +33,11 @@ function json_decode_safe(?string $json)
     $parsingException = $parser->lint($json);
 
     if ($parsingException !== null) {
-        throw $parsingException;
+        throw new JsonDecodeException(
+            $parsingException->getMessage(),
+            $parsingException->getCode(),
+            $parsingException
+        );
     }
 
     if ($data === null) {
